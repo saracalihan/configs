@@ -110,6 +110,10 @@ alias vpn='tor && konsole && proxychains firefox'
 alias up='cd ..'
 alias temp='watch sensors'
 alias phpadmin='sudo systemctl stop mysql; sudo  docker start mysql-server padmin && sudo docker ps'
+alias keyboard-green='g213-led -a 00ff00'
+alias keyboard-blue='g213-led -a 00ffef'
+alias keyboard-wave='g213-led -fx hwave keys 0a'
+
 export ANDROID_HOME=$HOME/Android/Sdk
 export PATH=$PATH:$ANDROID_HOME/emulator
 export PATH=$PATH:$ANDROID_HOME/tools
