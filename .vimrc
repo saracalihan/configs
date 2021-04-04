@@ -44,6 +44,9 @@ autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists('s:std_in
 autocmd BufEnter * if tabpagenr('$') == 1 && winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree() |
     \ quit | endif
 
+" Auto refresh nerdtree
+autocmd BufEnter NERD_tree_* | execute 'normal R'
+
 set encoding=UTF-8
 set number
 set tabstop=2 softtabstop=0 expandtab shiftwidth=2

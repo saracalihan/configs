@@ -1,5 +1,6 @@
+#!/bin/zsh
 # If you come from bash you might have to change your $PATH.
-# export PATH=$HOME/bin:/usr/local/bin:$PATH
+export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
 export ZSH="/home/saracalihan/.oh-my-zsh"
@@ -77,7 +78,7 @@ source $ZSH/oh-my-zsh.sh
 # export MANPATH="/usr/local/man:$MANPATH"
 
 # You may need to manually set your language environment
-# export LANG=en_US.UTF-8
+export LANG=en_US.UTF-8
 
 # Preferred editor for local and remote sessions
 # if [[ -n $SSH_CONNECTION ]]; then
@@ -85,9 +86,78 @@ source $ZSH/oh-my-zsh.sh
 # else
 #   export EDITOR='mvim'
 # fi
+export EDITOR='vim'
 
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
+
+function projects(){
+  cd ~/Desktop/projects/$1
+}
+
+function upp(){
+for (( c=0; c<$1; c++ ))
+  do  
+    cd .. 
+done
+
+}
+
+#girilen portu kill eder
+function oldur(){
+  lsof -i:$1
+  pid=`lsof -i:$1 | tail -1 | awk '{ print $2}'`
+  echo $pid
+
+  if [ $pid != "" ]
+  then
+    kill $pid && echo "Success"
+  else
+    echo "Port not listen"
+  fi
+}
+
+# toggle mongo client admin
+function madmin(){
+  if [ $1 -ne "" ]
+  then
+    PORT=$1
+  else
+    PORT=6060
+  fi
+
+  MADMIN_ID=`docker ps | grep mongoclient/mongoclient | awk '{print $1}'`
+  
+  if [ $MADMIN_ID != "" ]
+  then
+    docker kill $MADMIN_ID
+    echo "Killed mongo client admin"
+  else
+    docker run -p ${PORT}:3000 -d mongoclient/mongoclient
+    echo "Started mongo client admin on http://localhost:${PORT}"
+  fi
+}
+
+# toggle mongo client admin
+function pgadmin(){
+  if [ $1 -ne "" ]
+  then
+    PORT=$1
+  else
+    PORT=5050
+  fi
+
+  MADMIN_ID=`docker ps | grep dpage/pgadmin4 | awk '{print $1}'`
+  
+  if [ $MADMIN_ID != "" ]
+  then
+    docker kill $MADMIN_ID
+    echo "Killed postgres admin"
+  else
+    docker run -e PGADMIN_DEFAULT_EMAIL=pgadmin4@pgadmin.org -e PGADMIN_DEFAULT_PASSWORD=admin -p ${PORT}:80 -d dpage/pgadmin4
+    echo "Started postgres admin on http://localhost:${PORT}"
+  fi
+}
 
 # Set personal aliases, overriding those provided by oh-my-zsh libs,
 # plugins, and themes. Aliases can be placed here, though oh-my-zsh
@@ -103,16 +173,21 @@ alias free='free -m'                      # show sizes in MB
 alias np='nano -w PKGBUILD'
 alias more=less
 alias la='ls -all'
-alias projects='cd /home/saracalihan/Desktop/projects'
 alias shellScripts='cd /home/saracalihan/Desktop/shellScripts'
 alias desktop='cd /home/saracalihan/Desktop'
 alias vpn='tor && konsole && proxychains firefox'
-alias up='cd ..'
 alias temp='watch sensors'
 alias phpadmin='sudo systemctl stop mysql; sudo  docker start mysql-server padmin && sudo docker ps'
 alias keyboard-green='g213-led -a 00ff00'
 alias keyboard-blue='g213-led -a 00ffef'
-alias keyboard-wave='g213-led -fx hwave keys 0a'
+alias keyboard-wave='g213-led -fx hwave keys 20'
+alias docker='sudo docker'
+alias source_zshrc='source ~/.zshrc'
+alias source_vimrc='source ~/.vimrc'
+
+export LOCALHOST=/srv/http
+export vimrc=~/.vimrc
+export zshrc=~/.zshrc
 
 export ANDROID_HOME=$HOME/Android/Sdk
 export PATH=$PATH:$ANDROID_HOME/emulator
