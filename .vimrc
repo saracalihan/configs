@@ -24,7 +24,7 @@ Plugin 'leafgarland/typescript-vim'
 Plugin 'scrooloose/nerdtree'
 Plugin 'tiagofumo/vim-nerdtree-syntax-highlight'
 Plugin 'ryanoasis/vim-devicons'
-
+Plugin 'Xuyuanp/nerdtree-git-plugin'
 Plugin 'afterglow'
 call vundle#end()
 
