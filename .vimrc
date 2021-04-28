@@ -7,6 +7,9 @@
 " :PluginClean      - confirms removal of unused plugins; append `!` to auto-approve removal
 " see :h vundle for more details or wiki for FAQ
 
+" <leader> key
+:let mapleader = "<"
+
 set nocompatible              " be iMproved, required
 filetype off                  " required
 filetype plugin indent on    " required
@@ -47,7 +50,8 @@ autocmd BufEnter * if tabpagenr('$') == 1 && winnr('$') == 1 && exists('b:NERDTr
 " Auto refresh nerdtree
 autocmd BufEnter NERD_tree_* | execute 'normal R'
 
-set encoding=UTF-8
+map <leader>nn :NERDTreeToggle<cr>
+
 set number
 set tabstop=2 softtabstop=0 expandtab shiftwidth=2
 
