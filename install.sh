@@ -1,24 +1,22 @@
-pmInstallCommand="sudo apt install"
+pmInstallCommand="sudo pacman -S" 
 here=$PWD
-green=`tput setaf 2`
-reset=`tput sgr0`
 
 cd
 #install git
 echo "+++++++++++++| ${red}INSTALL GIT${reset} |+++++++++++++"
-#$pmInstallCommand git
+$pmInstallCommand git
 
 cd
 
 #install vim
 echo "+++++++++++++| ${red}INSTALL VIM${reset} |+++++++++++++"
 $pmInstallCommand vim
-cp $here/.vimrc /home/saracalihan/.vimrc
+cp $here/.vimrc /home/$USER/.vimrc
 echo "+++++++++++++| ${red}INSTALL VUNDLE${reset} |+++++++++++++"
 git clone https://github.com/VundleVim/Vundle.vim.git /home/saracalihan/.vim/bundle/Vundle.vim
 git clone https://github.com/danilo-augusto/vim-afterglow.git /home/saracalihan/.vim/bundle/afterglow
 echo "+++++++++++++| ${red}SET .VIMRC${reset} |+++++++++++++"
-source /home/saracalihan/.vimrc
+source /home/$USER/.vimrc
 echo "+++++++++++++| ${red}INSTALL VIM PLUGINS${reset} |+++++++++++++"
 vim +PluginInstall +qall
 cd
@@ -30,30 +28,34 @@ node --version
 npm --version
 
 echo "+++++++++++++| ${red}INSTALL YARN${reset} |+++++++++++++"
-npm install -g yarn
+sudo npm install -g yarn
 yarn --version
-
-cd
 
 #get all projects
 echo "+++++++++++++| ${red}GET ALL PROJECTS${reset} |+++++++++++++"
-$here/./install.sh
+$here/getProjects/install.sh $here
 cd
 
-8 #get all projects                                                                                        
+echo "+++++++++++++| ${red}INSTALL Tree${reset} |+++++++++++++"
+$pmInstallCommand tree
+
 echo "+++++++++++++| ${red}INSTALL BAT${reset} |+++++++++++++"
-$here/./install.sh
+$pmInstallCommand bat
 cd  
 
+echo "+++++++++++++| ${red}INSTALL Docker${reset} |+++++++++++++"
+$pmInstallCommand docker
+docker -v
+
 #install zsh
-#echo "+++++++++++++| ${red}INSTALL ZSH${reset} |+++++++++++++"
-#$pmInstallCommand zsh
+echo "+++++++++++++| ${red}INSTALL ZSH${reset} |+++++++++++++"
+$pmInstallCommand zsh
 
-#echo "+++++++++++++| ${red}INSTALL OH-MY-ZSH${reset} |+++++++++++++"
-#sh -c "$(wget -O- https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-#cp $here/.zshrc /home/saracalihan/.zshrc
-#source /home/saracalihan/.zshrc
+echo "+++++++++++++| ${red}INSTALL OH-MY-ZSH${reset} |+++++++++++++"
+cp $here/.zshrc /home/$USER/.zshrc
+sh -c "$(wget -O- https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+source /home/$USER/.zshrc
 
 
-#echo "+++++++++++++| ${red}CHANGE DEFAULT SHELL TO ZSH${reset} |+++++++++++++"
-#sudo chsh -s $(which zsh)
+echo "+++++++++++++| ${red}CHANGE DEFAULT SHELL TO ZSH${reset} |+++++++++++++"
+chsh -s $(which zsh)
