@@ -59,7 +59,7 @@ ZSH_THEME="robbyrussell"
 # "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
 # or set a custom format using the strftime function format specifications,
 # see 'man strftime' for details.
-# HIST_STAMPS="mm/dd/yyyy"
+HIST_STAMPS="mm/dd/yyyy"
 
 # Would you like to use another custom folder than $ZSH/custom?
 # ZSH_CUSTOM=/path/to/new-custom-folder
@@ -109,6 +109,12 @@ function oldur(){
   fi
 }
 
+MY_POSTGRES_USER="postgres"
+MY_POSTGRES_password="123456"
+MY_MYSQL_USER="root"
+MY_MYSQL_PASSWORD="123456"
+
+
 # toggle mongo client admin
 function madmin(){
   if [ $1 -ne "" ]
@@ -146,7 +152,7 @@ function pgadmin(){
     docker kill $MADMIN_ID
     echo "Killed postgres admin"
   else #sudo chown -R 5050:5050 /pgadmin_data    for access volume
-    docker run -e PGADMIN_DEFAULT_EMAIL=pgadmin4@pgadmin.org -e PGADMIN_DEFAULT_PASSWORD=admin -e PGADMIN_LISTEN_PORT=${PORT} -v "/pgadmin_data/servers.json":/pgadmin4/servers.json -v "/pgadmin_data/pgadmin":/var/lib/pgadmin --network host -d dpage/pgadmin4
+   sudo docker run -e PGADMIN_DEFAULT_EMAIL=pgadmin4@pgadmin.org -e PGADMIN_DEFAULT_PASSWORD=admin -e PGADMIN_LISTEN_PORT=${PORT} -v "/pgadmin_data/servers.json":/pgadmin4/servers.json -v "/pgadmin_data/pgadmin":/var/lib/pgadmin --network host -d dpage/pgadmin4
     echo "Started postgres admin on http://localhost:${PORT}"
   fi
 }
@@ -179,9 +185,12 @@ alias edit_zshrc='$EDITOR ~/.zshrc && source ~/.zshrc'
 alias cdr='cd `git rev-parse --show-toplevel`'
 alias clip='xclip -sel clip'
 
+alias pg_server='sudo docker run --name pg_server -e POSTGRES_PASSWORD=123456 -v /var/lib/postgresql:/var/lib/postgresql/data -p 5432:5432 -d postgres'
+alias mysql_server='sudo docker run --name mysql_server -e MYSQL_ROOT_PASSWORD=123456 -v /var/lib/mysql:/var/lib/mysql -p 3306:3306 -d mysql'
+
 export LOCALHOST=/srv/http
-export vimrc=~/.vimrc
-export zshrc=~/.zshrc
+export VIMRC=~/.vimrc
+export ZSHRC=~/.zshrc
 
 export ANDROID_HOME=$HOME/Android/Sdk
 export PATH=$PATH:$ANDROID_HOME/emulator
