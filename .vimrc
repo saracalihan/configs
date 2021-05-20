@@ -29,6 +29,7 @@ Plugin 'tiagofumo/vim-nerdtree-syntax-highlight'
 Plugin 'ryanoasis/vim-devicons'
 Plugin 'Xuyuanp/nerdtree-git-plugin'
 Plugin 'afterglow'
+Plugin 'jiangmiao/auto-pairs'
 call vundle#end()
 
 " Vundle End

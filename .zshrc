@@ -95,6 +95,10 @@ function projects(){
   cd ~/Desktop/projects/$1
 }
 
+function desktop(){
+  cd ~/Desktop/$1
+}
+
 #girilen portu kill eder
 function oldur(){
   lsof -i:$1
@@ -108,12 +112,6 @@ function oldur(){
     echo "Port not listen"
   fi
 }
-
-MY_POSTGRES_USER="postgres"
-MY_POSTGRES_password="123456"
-MY_MYSQL_USER="root"
-MY_MYSQL_PASSWORD="123456"
-
 
 # toggle mongo client admin
 function madmin(){
@@ -177,7 +175,6 @@ alias free='free -m'                      # show sizes in MB
 alias np='$EDITOR -w PKGBUILD'
 alias more=less
 alias la='ls -all'
-alias desktop='cd /home/saracalihan/Desktop'
 alias temp='watch sensors'
 alias docker='sudo docker'
 alias edit_vimrc='$EDITOR ~/.vimrc && source ~/.vimrc' 
@@ -191,9 +188,16 @@ alias mysql_server='sudo docker run --name mysql_server -e MYSQL_ROOT_PASSWORD=1
 export LOCALHOST=/srv/http
 export VIMRC=~/.vimrc
 export ZSHRC=~/.zshrc
+export WINDOWS=/run/media/$USER/Windows/Users/AlihanSarac
 
+
+# For android develpoment
 export ANDROID_HOME=$HOME/Android/Sdk
 export PATH=$PATH:$ANDROID_HOME/emulator
 export PATH=$PATH:$ANDROID_HOME/tools
 export PATH=$PATH:$ANDROID_HOME/tools/bin
 export PATH=$PATH:$ANDROID_HOME/platform-tools
+
+# For Jekyll 
+export GEM_HOME="$HOME/gems"
+export PATH="$HOME/gems/bin:$PATH"
