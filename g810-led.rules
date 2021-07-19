@@ -1,1 +1,5 @@
-g213-led -a 00ff00
+# Green Profile
+
+a 00ff00 # Set all keys green
+
+c # Commit changes

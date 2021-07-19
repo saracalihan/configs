@@ -9,6 +9,7 @@
 
 " <leader> key
 :let mapleader = "<"
+set mouse=a  " dragable split with mouse
 
 set nocompatible              " be iMproved, required
 filetype off                  " required
@@ -29,6 +30,7 @@ Plugin 'tiagofumo/vim-nerdtree-syntax-highlight'
 Plugin 'ryanoasis/vim-devicons'
 Plugin 'Xuyuanp/nerdtree-git-plugin'
 Plugin 'afterglow'
+Plugin 'jiangmiao/auto-pairs'
 call vundle#end()
 
 " Vundle End
@@ -50,8 +52,6 @@ autocmd BufEnter * if tabpagenr('$') == 1 && winnr('$') == 1 && exists('b:NERDTr
 " Auto refresh nerdtree
 autocmd BufEnter NERD_tree_* | execute 'normal R'
 
-map <leader>nn :NERDTreeToggle<cr>
-
 set number
 set tabstop=2 softtabstop=0 expandtab shiftwidth=2
 
@@ -60,4 +60,12 @@ nmap <silent> <C-Down> :wincmd j<CR>
 nmap <silent> <C-Left> :wincmd h<CR>
 nmap <silent> <C-Right> :wincmd l<CR>
 
+" Togle nerdtree
+map <leader>nn :NERDTreeToggle<cr>
+
+" Switch next tab(for create next tab pres 't' key on selected file) and switch previous tab
+nnoremap 1  :tabp<CR>
+nnoremap 2  :tabn<CR>
+
 colorscheme afterglow
+

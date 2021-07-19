@@ -59,7 +59,7 @@ ZSH_THEME="robbyrussell"
 # "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
 # or set a custom format using the strftime function format specifications,
 # see 'man strftime' for details.
-# HIST_STAMPS="mm/dd/yyyy"
+HIST_STAMPS="mm/dd/yyyy"
 
 # Would you like to use another custom folder than $ZSH/custom?
 # ZSH_CUSTOM=/path/to/new-custom-folder
@@ -72,6 +72,11 @@ ZSH_THEME="robbyrussell"
 plugins=(git archlinux web-search terminitor)
 
 source $ZSH/oh-my-zsh.sh
+
+# For Tilix split from this directory error
+if [[ $TILIX_ID ]]; then
+        source /etc/profile.d/vte.sh
+fi
 
 # User configuration
 
@@ -91,27 +96,40 @@ export EDITOR='vim'
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
 
-function projects(){
-  cd ~/Desktop/projects/$1
+function projects(){ # USAGE: project <project-name> [ --list ]
+  for lastArg; do
+  done
+  
+  if [ "$lastArg" = "--list" ] || [ "$lastArg" = "-l" ]; then
+    pName=""
+    if [ $# -ne 1 ]; then # projetcs crud-example --list
+      pName="$1"
+    fi
+    ls ~/Desktop/projects/$pName
+  else 
+    cd ~/Desktop/projects/$1
+  fi
+}
+
+function desktop(){
+  cd ~/Desktop/$1
 }
 
 #girilen portu kill eder
 function oldur(){
-  lsof -i:$1
   pid=`lsof -i:$1 | tail -1 | awk '{ print $2}'`
-  echo $pid
 
-  if [ $pid != "" ]
+  if [ $pid != "" 2>/dev/null ]
   then
     kill $pid && echo "Success"
   else
-    echo "Port not listen"
+    echo "Port not listening"
   fi
 }
 
 # toggle mongo client admin
 function madmin(){
-  if [ $1 -ne "" ]
+  if [ $1 -ne "" 2>/dev/null ]
   then
     PORT=$1
   else
@@ -120,7 +138,7 @@ function madmin(){
 
   MADMIN_ID=`docker ps | grep mongoclient/mongoclient | awk '{print $1}'`
   
-  if [ $MADMIN_ID != "" ]
+  if [ $MADMIN_ID != "" 2>/dev/null ]
   then
     docker kill $MADMIN_ID
     echo "Killed mongo client admin"
@@ -132,7 +150,7 @@ function madmin(){
 
 # toggle postgres admin
 function pgadmin(){
-  if [ $1 -ne "" ]
+  if [ $1 -ne "" 2>/dev/null ]
   then
     PORT=$1
   else
@@ -141,12 +159,12 @@ function pgadmin(){
 
   MADMIN_ID=`docker ps | grep dpage/pgadmin4 | awk '{print $1}'`
   
-  if [ $MADMIN_ID != "" ]
+  if [ $MADMIN_ID != "" 2>/dev/null ]
   then
     docker kill $MADMIN_ID
     echo "Killed postgres admin"
   else #sudo chown -R 5050:5050 /pgadmin_data    for access volume
-    docker run -e PGADMIN_DEFAULT_EMAIL=pgadmin4@pgadmin.org -e PGADMIN_DEFAULT_PASSWORD=admin -e PGADMIN_LISTEN_PORT=${PORT} -v "/pgadmin_data/servers.json":/pgadmin4/servers.json -v "/pgadmin_data/pgadmin":/var/lib/pgadmin --network host -d dpage/pgadmin4
+   sudo docker run -e PGADMIN_DEFAULT_EMAIL=pgadmin4@pgadmin.org -e PGADMIN_DEFAULT_PASSWORD=admin -e PGADMIN_LISTEN_PORT=${PORT} -v "/pgadmin_data/servers.json":/pgadmin4/servers.json -v "/pgadmin_data/pgadmin":/var/lib/pgadmin --network host -d dpage/pgadmin4
     echo "Started postgres admin on http://localhost:${PORT}"
   fi
 }
@@ -171,7 +189,6 @@ alias free='free -m'                      # show sizes in MB
 alias np='$EDITOR -w PKGBUILD'
 alias more=less
 alias la='ls -all'
-alias desktop='cd /home/saracalihan/Desktop'
 alias temp='watch sensors'
 alias docker='sudo docker'
 alias edit_vimrc='$EDITOR ~/.vimrc && source ~/.vimrc' 
@@ -179,12 +196,41 @@ alias edit_zshrc='$EDITOR ~/.zshrc && source ~/.zshrc'
 alias cdr='cd `git rev-parse --show-toplevel`'
 alias clip='xclip -sel clip'
 
-export LOCALHOST=/srv/http
-export vimrc=~/.vimrc
-export zshrc=~/.zshrc
 
+postgres_user=`cat ~/.config/docker-alias | grep postgres_user | awk '{printf $2}'`
+postgres_pass=`cat ~/.config/docker-alias | grep postgres_pass | awk '{printf $2}'`
+
+mysql_user=`cat ~/.config/docker-alias | grep mysql_user | awk '{printf $2}'`
+mysql_pass=`cat ~/.config/docker-alias | grep mysql_pass | awk '{printf $2}'`
+
+mongo_user=`cat ~/.config/docker-alias | grep mongo_user | awk '{printf $2}'`
+mongo_pass=`cat ~/.config/docker-alias | grep mongo_pass | awk '{printf $2}'`
+
+alias pg_server='sudo docker run --name pg_server -e POSTGRES_PASSWORD=$postgres_pass -v /var/lib/postgresql:/var/lib/postgresql/data -p 5432:5432 -d postgres'
+alias pg_shell='sudo docker exec -it pg_server psql -U $postgre_user'
+
+alias mysql_server='sudo docker run --name mysql_server -e MYSQL_ROOT_PASSWORD=$mysql_pass -v /var/lib/mysql:/var/lib/mysql -p 3306:3306 -d mysql'
+alias mysql_shell='sudo docker exec -it mysql_server mysql -u$mysql_user -p$mysql_pass'
+
+alias mongo_server='sudo docker run --name mongo_server -e MONGO_INITDB_ROOT_USERNAME=$mongo_user -e MONGO_INITDB_ROOT_PASSWORD=$mongo_pass -v /etc/mongo:/etc/mongo -p 27017:27017 -d  mongo'
+alias mongo_shell='sudo docker exec -it mongo_server mongo -u $mongo_user -p $mongo_pass'
+
+
+export LOCALHOST=/srv/http
+export VIMRC=~/.vimrc
+export ZSHRC=~/.zshrc
+export WINDOWS=/run/media/$USER/Windows/Users/AlihanSarac
+
+
+# For android develpoment
 export ANDROID_HOME=$HOME/Android/Sdk
 export PATH=$PATH:$ANDROID_HOME/emulator
 export PATH=$PATH:$ANDROID_HOME/tools
 export PATH=$PATH:$ANDROID_HOME/tools/bin
 export PATH=$PATH:$ANDROID_HOME/platform-tools
+
+# For Jekyll 
+export GEM_HOME="$HOME/gems"
+export PATH="$HOME/gems/bin:$PATH"
+export PATH="$HOME/.local/share/gem/ruby/3.0.0/bin:$PATH"
+

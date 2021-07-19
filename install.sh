@@ -1,55 +1,75 @@
-pmInstallCommand="sudo apt install"
+# package manager install command
+pmInstallCommand="sudo pacman -S"
+
 here=$PWD
+
+echo "+++++++++++++| Set Cron Jobs |+++++++++++++"
+sudo cp crontab /etc/spool/$USER
+crontab -l
 
 
 #install git
-#echo "+++++++++++++| INSTALL GIT |+++++++++++++"
-#$pmInstallCommand git
+echo "+++++++++++++| INSTALL GIT |+++++++++++++"
+$pmInstallCommand git
 
-# install vim
-echo "+++++++++++++| "INSTALL VIM |+++++++++++++"
+cd
+
+echo "+++++++++++++| INSTALL VIM |+++++++++++++"
 $pmInstallCommand vim
-cp $here/.vimrc /home/saracalihan/.vimrc
+cp $here/.vimrc /home/$USER/.vimrc
+
 echo "+++++++++++++| INSTALL VUNDLE |+++++++++++++"
 git clone https://github.com/VundleVim/Vundle.vim.git /home/saracalihan/.vim/bundle/Vundle.vim
 git clone https://github.com/danilo-augusto/vim-afterglow.git /home/saracalihan/.vim/bundle/afterglow
+
 echo "+++++++++++++| SET .VIMRC |+++++++++++++"
-source /home/saracalihan/.vimrc
+source /home/$USER/.vimrc
+
 echo "+++++++++++++| INSTALL VIM PLUGINS |+++++++++++++"
 vim +PluginInstall +qall
 cd
 
-# install node & npm
 echo "+++++++++++++| INSTALL NODE & NPM |+++++++++++++"
 $pmInstallCommand nodejs npm
 node --version
 npm --version
 
 echo "+++++++++++++| INSTALL YARN |+++++++++++++"
-npm install -g yarn
+sudo npm install -g yarn
 yarn --version
 
-cd
-
-#get all projects
 echo "+++++++++++++| GET ALL PROJECTS |+++++++++++++"
-$here/./install.sh
+$here/getProjects/install.sh $here
 cd
 
-8 #get all projects                                                                                        
+echo "+++++++++++++| INSTALL Tree |+++++++++++++"
+$pmInstallCommand tree
+
 echo "+++++++++++++| INSTALL BAT |+++++++++++++"
-$here/./install.sh
+$pmInstallCommand bat
 cd  
 
-# install zsh
+echo "+++++++++++++| INSTALL Docker |+++++++++++++"
+$pmInstallCommand docker
+docker -v
+
+echo "+++++++++++++| INSTALL KEYBOARD DRIVER |+++++++++++++"
+$pmInstallCommand g810-led-lib
+sudo cp g810-led.rules /etc/udev/rules.d/g810-led.rules
+
+echo "+++++++++++++| INSTALL Tilix |+++++++++++++"
+$pmInstallCommand tilix
+# set tilix config, 'dconf dump /com/gexperts/Tilix/ > tilix.dconf' copy config 
+dconf load /com/gexperts/Tilix/ < tilix.dconf
+
 echo "+++++++++++++| INSTALL ZSH |+++++++++++++"
 $pmInstallCommand zsh
 
 echo "+++++++++++++| INSTALL OH-MY-ZSH |+++++++++++++"
-cp $here/.zshrc /home/saracalihan/.zshrc
+cp $here/.zshrc /home/$USER/.zshrc
 sh -c "$(wget -O- https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-source /home/saracalihan/.zshrc
+source /home/$USER/.zshrc
 
 
-#echo "+++++++++++++| CHANGE DEFAULT SHELL TO ZSH |+++++++++++++"
-#sudo chsh -s $(which zsh)
+echo "+++++++++++++| CHANGE DEFAULT SHELL TO ZSH |+++++++++++++"
+chsh -s $(which zsh)
