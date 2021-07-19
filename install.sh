@@ -2,15 +2,15 @@
 pmInstallCommand="package manager install command"
 here=$PWD
 
-os=`grep "ID_LIKE" /etc/os-release | awk '{ print substr($1,9) }'`
+os=`grep "ID_LIKE" /etc/os-release | awk '{ print substr($1,9) }'` 
 
 # select install command 
 case $os in
   "arch")
-    ic="sudo pacman -S"
+    pmInstallCommand="sudo pacman -S"
     ;;
   "debian")
-    ic="sudo apt-get install"
+    pmInstallCommand="sudo apt-get install"
     ;;
 esac
 
