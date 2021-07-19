@@ -1,7 +1,18 @@
 # package manager install command
-pmInstallCommand="sudo pacman -S"
-
+pmInstallCommand="package manager install command"
 here=$PWD
+
+os=`grep "ID_LIKE" /etc/os-release | awk '{ print substr($1,9) }'`
+
+# select install command 
+case $os in
+  "arch")
+    ic="sudo pacman -S"
+    ;;
+  "debian")
+    ic="sudo apt-get install"
+    ;;
+esac
 
 echo "+++++++++++++| Set Cron Jobs |+++++++++++++"
 sudo cp crontab /etc/spool/$USER
