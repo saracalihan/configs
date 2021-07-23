@@ -15,9 +15,13 @@
 ├── realtech-wifi-driver.sh # wifi driver
 └── tilix.dconf # Tilix terminal emilator config file
 ```
+## Clone
+```bash
+git clone https://github.com/saracalihan/configs.git
+cd configs
+```
 
-## Start Command
+## Start installation
 ```bash
 ./install.sh
 ```
-
