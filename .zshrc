@@ -207,10 +207,10 @@ mongo_user=`cat ~/.config/docker-alias | grep mongo_user | awk '{printf $2}'`
 mongo_pass=`cat ~/.config/docker-alias | grep mongo_pass | awk '{printf $2}'`
 
 alias pg_server='sudo docker run --name pg_server -e POSTGRES_PASSWORD=$postgres_pass -v /var/lib/postgresql:/var/lib/postgresql/data -p 5432:5432 -d postgres'
-alias pg_shell='sudo docker exec -it pg_server psql -U $postgre_user'
+alias pg_shell='sudo docker exec -it pg_server psql -U $postgres_user'
 
 alias mysql_server='sudo docker run --name mysql_server -e MYSQL_ROOT_PASSWORD=$mysql_pass -v /var/lib/mysql:/var/lib/mysql -p 3306:3306 -d mysql'
-alias mysql_shell='sudo docker exec -it mysql_server mysql -u$mysql_user -p$mysql_pass'
+alias mysql_shell='sudo docker exec -it mysql_server mysql -u$mysql_user -p'
 
 alias mongo_server='sudo docker run --name mongo_server -e MONGO_INITDB_ROOT_USERNAME=$mongo_user -e MONGO_INITDB_ROOT_PASSWORD=$mongo_pass -v /etc/mongo:/etc/mongo -p 27017:27017 -d  mongo'
 alias mongo_shell='sudo docker exec -it mongo_server mongo -u $mongo_user -p $mongo_pass'
