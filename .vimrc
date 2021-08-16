@@ -32,7 +32,6 @@ Plugin 'Xuyuanp/nerdtree-git-plugin'
 Plugin 'afterglow'
 Plugin 'jiangmiao/auto-pairs'
 call vundle#end()
-
 " Vundle End
 
 filetype plugin on
@@ -59,6 +58,15 @@ nmap <silent> <C-Up> :wincmd k<CR>
 nmap <silent> <C-Down> :wincmd j<CR>
 nmap <silent> <C-Left> :wincmd h<CR>
 nmap <silent> <C-Right> :wincmd l<CR>
+
+" Move viewport up one line
+nmap <S-w> <C-y>  
+
+" Move viewport up one line
+nmap <S-s> <C-e> 
+
+inoremap <A-up> <ESC>:m -2<CR>==gi
+inoremap <A-down> <ESC>:m +1<CR>==gi
 
 " Togle nerdtree
 map <leader>nn :NERDTreeToggle<cr>
