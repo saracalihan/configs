@@ -19,7 +19,7 @@ filetype plugin indent on    " required
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 Plugin 'VundleVim/Vundle.vim'
-Plugin 'tpope/vim-fugitive'
+"Plugin 'tpope/vim-fugitive'
 Plugin 'pangloss/vim-javascript'
 Plugin 'mxw/vim-jsx'
 Plugin 'scrooloose/syntastic'
@@ -74,6 +74,11 @@ map <leader>nn :NERDTreeToggle<cr>
 " Switch next tab(for create next tab pres 't' key on selected file) and switch previous tab
 nnoremap 1  :tabp<CR>
 nnoremap 2  :tabn<CR>
+
+" Undo
+map <C-z> :u<CR> 
+" Redo
+map <C-y> :redo<CR>
 
 colorscheme afterglow
 

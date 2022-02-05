@@ -215,6 +215,8 @@ alias mysql_shell='sudo docker exec -it mysql_server mysql -u$mysql_user -p'
 alias mongo_server='sudo docker run --name mongo_server -e MONGO_INITDB_ROOT_USERNAME=$mongo_user -e MONGO_INITDB_ROOT_PASSWORD=$mongo_pass -v /etc/mongo:/etc/mongo -p 27017:27017 -d  mongo'
 alias mongo_shell='sudo docker exec -it mongo_server mongo -u $mongo_user -p $mongo_pass'
 
+alias redis_server='docker run --name redis_server -v /docker/host/dir:/data -p 6379:6379 -d redis  redis-server --save 60 1'
+alias redis_shell='docker exec -it redis_server redis-cli'
 
 export LOCALHOST=/srv/http
 export VIMRC=~/.vimrc
@@ -233,4 +235,3 @@ export PATH=$PATH:$ANDROID_HOME/platform-tools
 export GEM_HOME="$HOME/gems"
 export PATH="$HOME/gems/bin:$PATH"
 export PATH="$HOME/.local/share/gem/ruby/3.0.0/bin:$PATH"
-
