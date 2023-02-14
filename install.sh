@@ -21,12 +21,12 @@ crontab -l
 
 #install git
 echo "+++++++++++++| INSTALL GIT |+++++++++++++"
-$pmInstallCommand git
+$pmInstallCommand git --noconfirm
 
 cd
 
 echo "+++++++++++++| INSTALL VIM |+++++++++++++"
-$pmInstallCommand vim
+$pmInstallCommand vim --noconfirm
 cp $here/.vimrc /home/$USER/.vimrc
 
 echo "+++++++++++++| INSTALL VUNDLE |+++++++++++++"
@@ -41,12 +41,12 @@ vim +PluginInstall +qall
 cd
 
 echo "+++++++++++++| INSTALL NODE & NPM |+++++++++++++"
-$pmInstallCommand nodejs npm
+$pmInstallCommand nodejs npm --noconfirm
 node --version
 npm --version
 
 echo "+++++++++++++| INSTALL YARN |+++++++++++++"
-sudo npm install -g yarn
+sudo npm install -g yarn --noconfirm
 yarn --version
 
 echo "+++++++++++++| GET ALL PROJECTS |+++++++++++++"
@@ -54,27 +54,27 @@ $here/getProjects/install.sh $here
 cd
 
 echo "+++++++++++++| INSTALL Tree |+++++++++++++"
-$pmInstallCommand tree
+$pmInstallCommand tree --noconfirm
 
 echo "+++++++++++++| INSTALL BAT |+++++++++++++"
-$pmInstallCommand bat
+$pmInstallCommand bat --noconfirm
 cd  
 
 echo "+++++++++++++| INSTALL Docker |+++++++++++++"
-$pmInstallCommand docker
+$pmInstallCommand docker --noconfirm
 docker -v
 
 echo "+++++++++++++| INSTALL KEYBOARD DRIVER |+++++++++++++"
-$pmInstallCommand g810-led-lib
+$pmInstallCommand g810-led-lib --noconfirm
 sudo cp g810-led.rules /etc/udev/rules.d/g810-led.rules
 
 echo "+++++++++++++| INSTALL Tilix |+++++++++++++"
-$pmInstallCommand tilix
+$pmInstallCommand tilix --noconfirm
 # set tilix config, 'dconf dump /com/gexperts/Tilix/ > tilix.dconf' copy config 
 dconf load /com/gexperts/Tilix/ < tilix.dconf
 
 echo "+++++++++++++| INSTALL ZSH |+++++++++++++"
-$pmInstallCommand zsh
+$pmInstallCommand zsh --noconfirm
 
 echo "+++++++++++++| INSTALL OH-MY-ZSH |+++++++++++++"
 cp $here/.zshrc /home/$USER/.zshrc
