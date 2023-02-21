@@ -1,0 +1,76 @@
+// visual studio code setting file
+{
+    "files.autoSave": "afterDelay",
+    "security.workspace.trust.untrustedFiles": "open",
+    "typescript.updateImportsOnFileMove.enabled": "always",
+    "javascript.updateImportsOnFileMove.enabled": "always",
+    "editor.fontSize": 14,
+    "editor.cursorStyle": "block",
+    "editor.cursorSmoothCaretAnimation": "off",
+    "editor.cursorBlinking": "phase",
+    "[javascript]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode",
+        "editor.tabSize": 2
+    },
+    "[typescript]": {
+        "editor.defaultFormatter": "vscode.typescript-language-features",
+        "editor.tabSize": 2
+    },
+    "[c]": {
+        "editor.tabSize": 4,
+        "editor.stickyScroll.enabled": true
+    },
+    "[cpp]": {
+        "editor.tabSize": 4,
+        "editor.stickyScroll.enabled": true
+    },
+    "[css]": {
+        "editor.suggest.insertMode": "replace",
+        "editor.tabSize": 4
+    },
+    "[scss]": {
+        "editor.suggest.insertMode": "replace",
+        "editor.stickyScroll.enabled": true
+    },
+    "[json]": {
+        "editor.quickSuggestions": {
+            "strings": true
+        },
+        "editor.suggest.insertMode": "replace",
+        "editor.stickyScroll.enabled": true
+    },
+    "workbench.colorTheme": "Default Dark+ Experimental",
+    "workbench.colorCustomizations": {
+        "editor.background": "#0D0D0D",
+        "editor.foreground": "#EFEFEF",
+        "editor.lineHighlightBackground": "#111212",
+        "editor.selectionBackground": "#cc000071",
+        "sideBar.background": "#111212",
+        "statusBar.background": "#0b0b0b",
+        "activityBar.background": "#141313",
+        "activityBar.activeBorder": "#EF2828",
+        "activityBar.foreground": "#EFEFEF",
+        "activityBarBadge.background": "#cc0000",
+        "tab.inactiveBackground": "#171818",
+        "tab.hoverBackground": "#282A2E",
+        // "sideBarSectionHeader.background": "#ff0000",
+        "editorCursor.foreground": "#D3D6CF",
+        "editorCursor.background": "#000000"
+    },
+    "editor.tokenColorCustomizations": {
+        "variables": "#EFEFEF",
+        "functions": "#e5d957"
+    },
+    "editor.semanticTokenColorCustomizations": {},
+    "editor.mouseWheelZoom": true,
+    "editor.renderWhitespace": "trailing",
+    "editor.roundedSelection": true,
+    "editor.wordWrap": "bounded",
+    "workbench.statusBar.visible": true,
+    "workbench.editor.closeEmptyGroups": true,
+    "editor.suggest.showStatusBar": true,
+    "problems.showCurrentInStatus": true,
+    "editor.minimap.autohide": true,
+    "window.zoomLevel": -1
+}
+
