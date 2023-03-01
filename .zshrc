@@ -69,7 +69,7 @@ HIST_STAMPS="mm/dd/yyyy"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git archlinux web-search terminitor)
+plugins=(git archlinux web-search terminitor git-prompt)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -95,6 +95,30 @@ export EDITOR='vim'
 
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
+
+#autoload -Uz vcs_info
+#zstyle ':vcs_info:*' enable git svn
+#zstyle ':vcs_info:git*' formats "%r/%S %b (%a) %m%u%c "
+#zstyle ':vcs_info:git*' formats "%b"
+
+
+#ZSH_THEME_GIT_PROMPT_PREFIX="$fg[red]"
+#ZSH_THEME_GIT_PROMPT_SUFFIX="$reset_color"
+
+#precmd() {
+#    vcs_info
+#}
+
+#setopt prompt_subst
+
+export ZSH_THEME_GIT_PROMPT_PREFIX=""
+export ZSH_THEME_GIT_PROMPT_SEPARATOR=" "
+export ZSH_THEME_GIT_PROMPT_SUFFIX=""
+export ZSH_THEME_GIT_PROMPT_BRANCH="%{$fg[yellow]%}"
+
+# > axe-api/build git:(feature/47-framework-support)
+# X axe-api/build git:(feature/47-framework-support) # if process exit
+export PROMPT="%B%(?:%{%}$fg[green]> :%{%}$fg[red]X )$reset_color$fg[blue][%n]$reset_color %B%{$fg[green]%}%2d%{$reset_color%} "
 
 function projects(){ # USAGE: project <project-name> [ --list ]
   for lastArg; do
@@ -191,8 +215,8 @@ alias more=less
 alias la='ls -all'
 alias temp='watch -n 1 sensors' # show sensors values like cpu cores TEMPerature, battery voltage, etc.
 alias docker='sudo docker'
-alias edit_vimrc='$EDITOR ~/.vimrc && source ~/.vimrc' 
-alias edit_zshrc='$EDITOR ~/.zshrc && source ~/.zshrc'
+alias edit_vimrc='$EDITOR ~/.vimrc && source ~/.vimrc && echo ".vimrc edited and sourced"'
+alias edit_zshrc='$EDITOR ~/.zshrc && source ~/.zshrc && echo ".zshrc edited and sourced"'
 alias cdr='cd `git rev-parse --show-toplevel`'
 alias clip='xclip -sel clip'
 
@@ -222,7 +246,7 @@ export LOCALHOST=/srv/http
 export VIMRC=~/.vimrc
 export ZSHRC=~/.zshrc
 export WINDOWS=/run/media/$USER/Windows/Users/AlihanSarac
-
+export SERVER_IP=31.223.19.17
 
 # For android develpoment
 export ANDROID_HOME=$HOME/Android/Sdk

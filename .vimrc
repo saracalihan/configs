@@ -65,13 +65,14 @@ nmap <S-w> <C-y>
 " Move viewport up one line
 nmap <S-s> <C-e> 
 
-inoremap <A-up> <ESC>:m -2<CR>==gi
-inoremap <A-down> <ESC>:m +1<CR>==gi
+" move this line
+inoremap <A-Up> <ESC>:m -2<CR>==gi
+inoremap <A-Down> <ESC>:m +1<CR>==gi
 
 " Togle nerdtree
 map <leader>nn :NERDTreeToggle<cr>
 
-" Switch next tab(for create next tab pres 't' key on selected file) and switch previous tab
+" Switch next tab(for create next tab press 't' key on selected file) and switch previous tab
 nnoremap 1  :tabp<CR>
 nnoremap 2  :tabn<CR>
 

@@ -33,20 +33,24 @@ win-switch-to-previous-session='<Alt>1'
 list=['2b7c4080-0ddd-46c5-8f23-563fd3ba789d']
 
 [profiles/2b7c4080-0ddd-46c5-8f23-563fd3ba789d]
-background-color='#1E1E1E1E1E1E'
+background-color='#0D0D0D0D0D0D'
 background-transparency-percent=0
 badge-color='#AC7EA8'
 badge-color-set=true
 bold-color-set=false
+cursor-blink-mode='on'
 cursor-colors-set=false
 default-size-columns=78
+default-size-rows=24
 dim-transparency-percent=18
-draw-margin=68
-font='Source Code Variable Semi-Bold 12'
+draw-margin=60
+font='Source Code Variable Semi-Bold 10'
 foreground-color='#EFEFEF'
 highlight-colors-set=false
+notify-silence-threshold=0
 palette=['#000000', '#CC0000', '#4D9A05', '#C3A000', '#3464A3', '#754F7B', '#05979A', '#D3D6CF', '#545652', '#EF2828', '#89E234', '#FBE84F', '#729ECF', '#AC7EA8', '#34E2E2', '#EDEDEB']
 scroll-on-output=true
+terminal-title='${id}: ${title}'
 use-system-font=false
 use-theme-colors=false
 visible-name='alihan'
