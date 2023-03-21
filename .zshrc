@@ -111,14 +111,14 @@ export EDITOR='vim'
 
 #setopt prompt_subst
 
-export ZSH_THEME_GIT_PROMPT_PREFIX=""
-export ZSH_THEME_GIT_PROMPT_SEPARATOR=" "
+ export ZSH_THEME_GIT_PROMPT_PREFIX=""
+ export ZSH_THEME_GIT_PROMPT_SEPARATOR=" "
 export ZSH_THEME_GIT_PROMPT_SUFFIX=""
 export ZSH_THEME_GIT_PROMPT_BRANCH="%{$fg[yellow]%}"
 
-# > axe-api/build git:(feature/47-framework-support)
-# X axe-api/build git:(feature/47-framework-support) # if process exit
-export PROMPT="%B%(?:%{%}$fg[green]> :%{%}$fg[red]X )$reset_color$fg[blue][%n]$reset_color %B%{$fg[green]%}%2d%{$reset_color%} "
+# > [saracalihan] /home/saracalihan:
+# X [saracalihan] /home/saracalihan: # if process exit with error code
+export PROMPT="%B%(?:%{%}%{$fg[green]%}> :%{%}%{$fg[red]%}X )%{$fg[blue]%}[%n] %B%{$fg[green]%}%3d%{$reset_color%}%b: "
 
 function projects(){ # USAGE: project <project-name> [ --list ]
   for lastArg; do
@@ -219,7 +219,7 @@ alias edit_vimrc='$EDITOR ~/.vimrc && source ~/.vimrc && echo ".vimrc edited and
 alias edit_zshrc='$EDITOR ~/.zshrc && source ~/.zshrc && echo ".zshrc edited and sourced"'
 alias cdr='cd `git rev-parse --show-toplevel`'
 alias clip='xclip -sel clip'
-
+alias dcr='docker'
 
 postgres_user=`cat ~/.config/docker-alias | grep postgres_user | awk '{printf $2}'`
 postgres_pass=`cat ~/.config/docker-alias | grep postgres_pass | awk '{printf $2}'`
@@ -246,7 +246,6 @@ export LOCALHOST=/srv/http
 export VIMRC=~/.vimrc
 export ZSHRC=~/.zshrc
 export WINDOWS=/run/media/$USER/Windows/Users/AlihanSarac
-export SERVER_IP=31.223.19.17
 
 # For android develpoment
 export ANDROID_HOME=$HOME/Android/Sdk
