@@ -1,14 +1,17 @@
 [/]
 control-click-titlebar=true
 control-scroll-zoom=true
-focus-follow-mouse=false
+copy-on-select=true
+focus-follow-mouse=true
 prompt-on-close=false
 prompt-on-delete-profile=true
 prompt-on-new-session=false
+quake-height-percent=40
 quake-specific-monitor=0
 terminal-title-style='none'
 theme-variant='system'
 warn-vte-config-issue=false
+window-save-state=false
 window-style='disable-csd-hide-toolbar'
 
 [keybindings]
@@ -38,13 +41,13 @@ background-transparency-percent=0
 badge-color='#AC7EA8'
 badge-color-set=true
 bold-color-set=false
+cell-height-scale=1.0
 cursor-blink-mode='on'
 cursor-colors-set=false
-default-size-columns=78
-default-size-rows=24
+default-size-columns=74
 dim-transparency-percent=18
 draw-margin=60
-font='Source Code Variable Semi-Bold 10'
+font='Sans Bold Italic 10'
 foreground-color='#EFEFEF'
 highlight-colors-set=false
 notify-silence-threshold=0
