@@ -1,4 +1,4 @@
-" To ignore plugin indent changes, instead use:
+" To ignore plugin indent changes, instead use
 " filetype plugin on
 " Brief help
 " :PluginList       - lists configured plugins
@@ -10,6 +10,36 @@
 " <leader> key
 :let mapleader = "<"
 set mouse=a  " dragable split with mouse
+
+set ic " ignore search case
+set is " show alo pasible matchs 
+set hls " highlight search match [ 'set nohls' for close that ]
+
+set smarttab
+
+" Use <C-L> to clear the highlighting of :set hlsearch.
+if maparg('<C-L>', 'n') ==# ''
+  nnoremap <silent> <C-L> :nohlsearch<C-R>=has('diff')?'<Bar>diffupdate':''<CR><CR><C-L>
+endif
+
+set list
+set list lcs=trail:·,tab:»·
+
+" function! FoldFunc()
+"   let thisline = getline(v:lnum)
+"   if thisline =~? '\v^\s*$'
+"     return '-1'
+"   endif
+"
+"   if thisline =~ '^import.*$'
+"     return 1
+"   else
+"     return indent(v:lnum) / &shiftwidth
+"   endif
+" endfunction
+"
+" set foldmethod=expr " for fonding code, use 'za' to toggle fold
+" setlocal foldexpr=FoldFunc()
 
 set nocompatible              " be iMproved, required
 filetype off                  " required
@@ -43,7 +73,7 @@ let NERDTreeShowHidden=1
 autocmd StdinReadPre * let s:std_in=1
 autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists('s:std_in') |
     \ execute 'NERDTree' argv()[0] | wincmd p | enew | execute 'cd '.argv()[0] | endif
-    
+
 " Exit Vim if NERDTree is the only window left.
 autocmd BufEnter * if tabpagenr('$') == 1 && winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree() |
     \ quit | endif
