@@ -1,4 +1,4 @@
-" To ignore plugin indent changes, instead use
+" To ignore plugin indent changes, instead use:
 " filetype plugin on
 " Brief help
 " :PluginList       - lists configured plugins
@@ -12,7 +12,7 @@
 set mouse=a  " dragable split with mouse
 
 set ic " ignore search case
-set is " show alo pasible matchs 
+set is " show alo pasible matchs
 set hls " highlight search match [ 'set nohls' for close that ]
 
 set smarttab
@@ -21,6 +21,7 @@ set smarttab
 if maparg('<C-L>', 'n') ==# ''
   nnoremap <silent> <C-L> :nohlsearch<C-R>=has('diff')?'<Bar>diffupdate':''<CR><CR><C-L>
 endif
+
 
 set list
 set list lcs=trail:·,tab:»·
@@ -61,6 +62,7 @@ Plugin 'ryanoasis/vim-devicons'
 Plugin 'Xuyuanp/nerdtree-git-plugin'
 Plugin 'afterglow'
 Plugin 'jiangmiao/auto-pairs'
+Plugin 'airblade/vim-gitgutter'
 call vundle#end()
 " Vundle End
 

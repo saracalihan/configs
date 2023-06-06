@@ -33,7 +33,7 @@ win-switch-to-next-session='<Alt>2'
 win-switch-to-previous-session='<Alt>1'
 
 [profiles]
-list=['2b7c4080-0ddd-46c5-8f23-563fd3ba789d']
+list=['2b7c4080-0ddd-46c5-8f23-563fd3ba789d', '4105c3bb-4482-4cb5-bd84-cc5a76a3f0dd']
 
 [profiles/2b7c4080-0ddd-46c5-8f23-563fd3ba789d]
 background-color='#0D0D0D0D0D0D'
@@ -59,3 +59,5 @@ use-system-font=false
 use-theme-colors=false
 visible-name='alihan'
 
+[profiles/4105c3bb-4482-4cb5-bd84-cc5a76a3f0dd]
+visible-name='default'

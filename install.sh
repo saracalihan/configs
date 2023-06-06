@@ -2,7 +2,11 @@
 pmInstallCommand="package manager install command"
 here=$PWD
 
-os=`grep "ID_LIKE" /etc/os-release | awk '{ print substr($1,9) }'` 
+os=`grep "ID_LIKE" /etc/os-release | awk '{ print substr($1,9) }'`
+
+# copy licenses
+chmod 777 ./licenses/create_license.sh && chmod 777 ./licenses/create_licensed_file.sh &&
+cp -r ./licenses ~/.licenses && echo "Licenses copied."
 
 # select install command 
 case $os in

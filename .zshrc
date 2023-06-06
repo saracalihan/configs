@@ -220,6 +220,8 @@ alias edit_zshrc='$EDITOR ~/.zshrc && source ~/.zshrc && echo ".zshrc edited and
 alias cdr='cd `git rev-parse --show-toplevel`'
 alias clip='xclip -sel clip'
 alias dcr='docker'
+alias create_license='~/.licenses/create_license.sh'
+alias create_file='~/.licenses/create_licensed_file.sh'
 
 postgres_user=`cat ~/.config/docker-alias | grep postgres_user | awk '{printf $2}'`
 postgres_pass=`cat ~/.config/docker-alias | grep postgres_pass | awk '{printf $2}'`
