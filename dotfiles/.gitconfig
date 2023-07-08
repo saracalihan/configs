@@ -1,0 +1,13 @@
+[user]
+	email = saracalihan@gmail.com
+	name = Alihan SARAÇ(Brick)
+[safe]
+	directory = /home/saracalihan/.vim/bundle/Vundle.vim
+	directory = /home/saracalihan/.vim/bundle/afterglow
+[init]
+	defaultBranch = main
+[filter "lfs"]
+	required = true
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process

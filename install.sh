@@ -1,12 +1,15 @@
 # package manager install command
 pmInstallCommand="package manager install command"
 here=$PWD
+DOTFILES=./dotfiles
 
 os=`grep "ID_LIKE" /etc/os-release | awk '{ print substr($1,9) }'`
 
 # copy licenses
 chmod 777 ./licenses/create_license.sh && chmod 777 ./licenses/create_licensed_file.sh &&
 cp -r ./licenses ~/.licenses && echo "Licenses copied."
+
+sh ./paste.sh
 
 # select install command 
 case $os in
@@ -19,9 +22,7 @@ case $os in
 esac
 
 echo "+++++++++++++| Set Cron Jobs |+++++++++++++"
-sudo cp crontab /etc/spool/$USER
 crontab -l
-
 
 #install git
 echo "+++++++++++++| INSTALL GIT |+++++++++++++"
@@ -70,7 +71,6 @@ docker -v
 
 echo "+++++++++++++| INSTALL KEYBOARD DRIVER |+++++++++++++"
 $pmInstallCommand g810-led-lib --noconfirm
-sudo cp g810-led.rules /etc/udev/rules.d/g810-led.rules
 
 echo "+++++++++++++| INSTALL Tilix |+++++++++++++"
 $pmInstallCommand tilix --noconfirm
