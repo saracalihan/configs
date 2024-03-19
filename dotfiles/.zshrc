@@ -43,10 +43,10 @@ ZSH_THEME="robbyrussell"
 # DISABLE_AUTO_TITLE="true"
 
 # Uncomment the following line to enable command auto-correction.
-# ENABLE_CORRECTION="true"
+ENABLE_CORRECTION="true"
 
 # Uncomment the following line to display red dots whilst waiting for completion.
-# COMPLETION_WAITING_DOTS="true"
+COMPLETION_WAITING_DOTS="true"
 
 # Uncomment the following line if you want to disable marking untracked files
 # under VCS as dirty. This makes repository status check for large repositories
@@ -116,6 +116,15 @@ export EDITOR='vim'
 export ZSH_THEME_GIT_PROMPT_SUFFIX=""
 export ZSH_THEME_GIT_PROMPT_BRANCH="%{$fg[yellow]%}"
 
+# man page colors
+export LESS_TERMCAP_mb=$'\e[01;31m'       # begin blinking
+export LESS_TERMCAP_md=$'\e[01;37m'       # begin bold
+export LESS_TERMCAP_me=$'\e[0m'           # end all mode like so, us, mb, md, mr
+export LESS_TERMCAP_se=$'\e[0m'           # end standout-mode
+export LESS_TERMCAP_so=$'\e[45;93m'       # start standout mode
+export LESS_TERMCAP_ue=$'\e[0m'           # end underline
+export LESS_TERMCAP_us=$'\e[4;93m'        # start underlining
+
 # > [saracalihan] /home/saracalihan:
 # X [saracalihan] /home/saracalihan: # if process exit with error code
 export PROMPT="%B%(?:%{%}%{$fg[green]%}> :%{%}%{$fg[red]%}X )%{$fg[blue]%}[%n] %B%{$fg[green]%}%3d%{$reset_color%}%b: "
@@ -134,6 +143,23 @@ function projects(){ # USAGE: project <project-name> [ --list ]
     cd ~/Desktop/projects/$1
   fi
 }
+
+function examples(){ # USAGE: examples <project-name> [ --list ]
+  for lastArg; do
+  done
+  
+  if [ "$lastArg" = "--list" ] || [ "$lastArg" = "-l" ]; then
+    pName=""
+    if [ $# -ne 1 ]; then # projetcs crud-example --list
+      pName="$1"
+    fi
+    ls ~/Desktop/examples/$pName
+  else 
+    cd ~/Desktop/examples/$1
+  fi
+}
+
+
 
 function desktop(){
   cd ~/Desktop/$1
@@ -292,3 +318,7 @@ export PATH=$PATH:$ANDROID_HOME/platform-tools
 export GEM_HOME="$HOME/gems"
 export PATH="$HOME/gems/bin:$PATH"
 export PATH="$HOME/.local/share/gem/ruby/3.0.0/bin:$PATH"
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
