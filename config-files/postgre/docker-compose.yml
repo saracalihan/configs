@@ -1,0 +1,18 @@
+ 
+version: '3.8'
+services:
+  postgres-server:
+    image: postgres:latest
+    container_name: XXXX-postgre-master
+    restart: always
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: password123
+      POSTGRES_DB: XXXX
+    ports:
+      - "5432:5432"
+    volumes:
+      - /data/volumes:/var/lib/postgresql/data
+      - ./data/init-scripts:/docker-entrypoint-initdb.d
+      - ./data/dumps:/dump
+      - ./data/backups:/backups
