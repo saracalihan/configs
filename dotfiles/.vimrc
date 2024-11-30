@@ -63,6 +63,7 @@ Plugin 'Xuyuanp/nerdtree-git-plugin'
 Plugin 'afterglow'
 Plugin 'jiangmiao/auto-pairs'
 Plugin 'airblade/vim-gitgutter'
+Plugin 'habamax/vim-sendtoterm'
 call vundle#end()
 " Vundle End
 
