@@ -1,0 +1,15 @@
+version: "3.9"
+services:
+  mongo-server:
+    container_name: dermoino-mongo-master
+    image: mongo
+    restart: always
+    ports:
+      - "27017:27017"
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: user
+      MONGO_INITDB_ROOT_PASSWORD: supersecretpass1234!
+    volumes:
+      - ./data/volumes/mongodb:/data
+      - ./data/dumps:/dump
+      - ./data/backups:/backups

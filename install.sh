@@ -11,7 +11,7 @@ cp -r ./licenses ~/.licenses && echo "Licenses copied."
 
 sh ./paste.sh
 
-# select install command 
+# select install command
 case $os in
   "arch")
     pmInstallCommand="sudo pacman -S"
@@ -26,12 +26,12 @@ crontab -l
 
 #install git
 echo "+++++++++++++| INSTALL GIT |+++++++++++++"
-$pmInstallCommand git --noconfirm
+$pmInstallCommand git 
 
 cd
 
 echo "+++++++++++++| INSTALL VIM |+++++++++++++"
-$pmInstallCommand vim --noconfirm
+$pmInstallCommand vim 
 cp $here/.vimrc /home/$USER/.vimrc
 
 echo "+++++++++++++| INSTALL VUNDLE |+++++++++++++"
@@ -46,12 +46,12 @@ vim +PluginInstall +qall
 cd
 
 echo "+++++++++++++| INSTALL NODE & NPM |+++++++++++++"
-$pmInstallCommand nodejs npm --noconfirm
+$pmInstallCommand nodejs npm
 node --version
 npm --version
 
 echo "+++++++++++++| INSTALL YARN |+++++++++++++"
-sudo npm install -g yarn --noconfirm
+sudo npm install -g yarn
 yarn --version
 
 echo "+++++++++++++| GET ALL PROJECTS |+++++++++++++"
@@ -59,26 +59,32 @@ $here/getProjects/install.sh $here
 cd
 
 echo "+++++++++++++| INSTALL Tree |+++++++++++++"
-$pmInstallCommand tree --noconfirm
+$pmInstallCommand tree
+
+echo "+++++++++++++| INSTALL Xclip |+++++++++++++"
+$pmInstallCommand xclip
+
+echo "+++++++++++++| INSTALL Htop |+++++++++++++"
+$pmInstallCommand htop
 
 echo "+++++++++++++| INSTALL BAT |+++++++++++++"
-$pmInstallCommand bat --noconfirm
+$pmInstallCommand bat
 cd  
 
 echo "+++++++++++++| INSTALL Docker |+++++++++++++"
-$pmInstallCommand docker --noconfirm
+$pmInstallCommand docker
 docker -v
 
 echo "+++++++++++++| INSTALL KEYBOARD DRIVER |+++++++++++++"
-$pmInstallCommand g810-led-lib --noconfirm
+$pmInstallCommand g810-led-lib
 
 echo "+++++++++++++| INSTALL Tilix |+++++++++++++"
-$pmInstallCommand tilix --noconfirm
+$pmInstallCommand tilix
 # set tilix config, 'dconf dump /com/gexperts/Tilix/ > tilix.dconf' copy config 
 dconf load /com/gexperts/Tilix/ < tilix.dconf
 
 echo "+++++++++++++| INSTALL ZSH |+++++++++++++"
-$pmInstallCommand zsh --noconfirm
+$pmInstallCommand zsh
 
 echo "+++++++++++++| INSTALL OH-MY-ZSH |+++++++++++++"
 cp $here/.zshrc /home/$USER/.zshrc

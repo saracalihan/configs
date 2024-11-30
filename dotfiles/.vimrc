@@ -91,8 +91,10 @@ nmap <silent> <C-Down> :wincmd j<CR>
 nmap <silent> <C-Left> :wincmd h<CR>
 nmap <silent> <C-Right> :wincmd l<CR>
 
+inoremap <S-c> :'<,'>w !xclip -selection clipboard<CR>
+
 " Move viewport up one line
-nmap <S-w> <C-y>  
+nmap <S-w> <C-y>
 
 " Move viewport up one line
 nmap <S-s> <C-e> 
