@@ -1,0 +1,89 @@
+version: "3.8"
+services:
+  api:
+    build: .
+    ports:
+      - "3001:3001"
+    environment:
+      - JAVA_OPTS=-javaagent:/app/opentelemetry-javaagent.jar -Dotel.exporter.otlp.endpoint=http://otel-collector:4318 -Dotel.service.name=api-service -Dotel.instrumentation.http.enabled=true -Dotel.instrumentation.runtime-metrics.enabled=true -Dotel.instrumentation.runtime-logs.enabled=true -Dotel.instrumentation.jvm.enabled=true -Dotel.metric.export.interval=5000
+    env_file:
+      - .env
+    restart: unless-stopped
+    depends_on:
+      - otel-collector
+
+  otel-collector:
+    image: otel/opentelemetry-collector-contrib
+    container_name: otel-collector
+    command: ["--config=/etc/otel-collector.yaml"]
+    volumes:
+      - ./open-telemetry/otel-collector.yaml:/etc/otel-collector.yaml
+    ports:
+      - "4318:4318"
+
+  prometheus:
+    image: prom/prometheus
+    container_name: prometheus
+    volumes:
+      - ./prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
+    ports:
+      - "9090:9090" # dashboard için, gerekli degil
+    environment:
+      - --config.file=/etc/prometheus/prometheus.yml
+      - --web.enable-remote-write-receiver
+    depends_on:
+      - api
+
+  opensearch:
+    image: opensearchproject/opensearch:2.11.1
+    container_name: opensearch
+    environment:
+      - cluster.name=opensearch-cluster
+      - node.name=opensearch
+      - discovery.type=single-node
+      - bootstrap.memory_lock=true
+      - "OPENSEARCH_JAVA_OPTS=-Xms512m -Xmx512m"
+      - "DISABLE_INSTALL_DEMO_CONFIG=true"
+      - "DISABLE_SECURITY_PLUGIN=true"
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+      nofile:
+        soft: 65536
+        hard: 65536
+    volumes:
+      - opensearch-data:/usr/share/opensearch/data
+    ports:
+      - "9200:9200"
+      - "9600:9600"
+
+  # opensearch-dashboards:
+  #   image: opensearchproject/opensearch-dashboards:2.11.1
+  #   container_name: opensearch-dashboards
+  #   ports:
+  #     - "5601:5601"
+  #   environment:
+  #     - 'OPENSEARCH_HOSTS=["http://opensearch:9200"]'
+  #     - "DISABLE_SECURITY_DASHBOARDS_PLUGIN=true"
+  #   depends_on:
+  #     - opensearch
+
+  grafana:
+    image: grafana/grafana:latest
+    container_name: grafana
+    ports:
+      - "3000:3000"
+    environment:
+      - GF_SECURITY_ADMIN_PASSWORD=admin
+      - GF_USERS_ALLOW_SIGN_UP=false
+      - GF_INSTALL_PLUGINS=grafana-opensearch-datasource
+    volumes:
+      - ./grafana/dashboards:/etc/grafana/provisioning/dashboards
+      - ./grafana/datasources.yml:/etc/grafana/provisioning/datasources/datasources.yml
+    depends_on:
+      - prometheus
+      - opensearch
+
+volumes:
+  opensearch-data:
